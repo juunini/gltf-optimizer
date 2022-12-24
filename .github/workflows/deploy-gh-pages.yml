@@ -1,0 +1,41 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - demo
+
+jobs:
+  deploy-github-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: antongolub/action-setup-bun@v1
+        with:
+          bun-version: 0.4.0
+          bun-config: '{"install": {"production": false}}' # You may need to write true if necessary.
+          cache: true
+          cache-bin: true
+
+      - uses: actions/cache@v3
+        id: bun-cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - run: bun install
+        if: ${{ steps.bun-cache.outputs.cache-hit != 'true' }}
+
+      - run: bun run build
+      - run: touch .svelte-kit/output/client/.nojekyll
+      - run: cp .svelte-kit/output/prerendered/pages/index.html .svelte-kit/output/client/
+
+      - name: Push gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages # branch name
+          folder: .svelte-kit/output/client
+          clean: true
