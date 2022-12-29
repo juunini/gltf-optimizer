@@ -30,83 +30,83 @@ export const flagOptions = {
     describe:
       "Write separate buffers, shaders, and textures instead of embedding them in the glTF.",
     type: "boolean",
-    default: defaults.separate,
+    default: false,
   },
   separateTextures: {
     alias: "t",
     describe: "Write out separate textures only.",
     type: "boolean",
-    default: defaults.separateTextures,
+    default: false,
   },
   stats: {
     describe: "Print statistics to console for output glTF file.",
     type: "boolean",
-    default: defaults.stats,
+    default: false,
   },
   keepUnusedElements: {
     describe: "Keep unused materials, nodes and meshes.",
     type: "boolean",
-    default: defaults.keepUnusedElements,
+    default: false,
   },
   keepLegacyExtensions: {
     describe:
       "When false, materials with KHR_techniques_webgl, KHR_blend, or KHR_materials_common will be converted to PBR.",
     type: "boolean",
-    default: defaults.keepLegacyExtensions,
+    default: false,
   },
   "draco.compressMeshes": {
     alias: "d",
     describe:
       "Compress the meshes using Draco. Adds the KHR_draco_mesh_compression extension.",
     type: "boolean",
-    default: defaults.compressDracoMeshes,
+    default: false,
   },
   "draco.compressionLevel": {
     describe:
       "Draco compression level [0-10], most is 10, least is 0. A value of 0 will apply sequential encoding and preserve face order.",
     type: "number",
-    default: dracoDefaults.compressionLevel,
+    default: 7,
   },
   "draco.quantizePositionBits": {
     describe:
       "Quantization bits for position attribute when using Draco compression.",
     type: "number",
-    default: dracoDefaults.quantizePositionBits,
+    default: 11,
   },
   "draco.quantizeNormalBits": {
     describe:
       "Quantization bits for normal attribute when using Draco compression.",
     type: "number",
-    default: dracoDefaults.quantizeNormalBits,
+    default: 8,
   },
   "draco.quantizeTexcoordBits": {
     describe:
       "Quantization bits for texture coordinate attribute when using Draco compression.",
     type: "number",
-    default: dracoDefaults.quantizeTexcoordBits,
+    default: 10,
   },
   "draco.quantizeColorBits": {
     describe:
       "Quantization bits for color attribute when using Draco compression.",
     type: "number",
-    default: dracoDefaults.quantizeColorBits,
+    default: 8,
   },
   "draco.quantizeGenericBits": {
     describe:
       "Quantization bits for skinning attribute (joint indices and joint weights) ad custom attributes when using Draco compression.",
     type: "number",
-    default: dracoDefaults.quantizeGenericBits,
+    default: 8,
   },
   "draco.uncompressedFallback": {
     describe: "Adds uncompressed fallback versions of the compressed meshes.",
     type: "boolean",
-    default: dracoDefaults.uncompressedFallback,
+    default: false,
   },
   "draco.unifiedQuantization": {
     describe:
       "Quantize positions of all primitives using the same quantization grid defined by the unified bounding box of all primitives. If this option is not set, quantization is applied on each primitive separately which can result in gaps appearing between different primitives.",
     type: "boolean",
-    default: dracoDefaults.unifiedQuantization,
+    default: false,
   },
   "texture.webp.enabled": {
     describe: "",
@@ -163,15 +163,16 @@ export const flagOptions = {
   },
   "texture.webp.crop": {
     describe: "Crop the image.",
-    type: "object { x: number, y: number, width: number, height: number }",
+    type: "string",
+    example: "object { x: number, y: number, width: number, height: number }",
   },
   "texture.webp.resize": {
     describe: "Resize the image. Happens after crop.",
-    type: "object { width: number, height: number }",
+    type: "string",
+    example: "object { width: number, height: number }",
   },
   "texture.webp.metadata": {
     describe: "A list of metadata to copy from the input to the output if present.",
-    type: "string | string[]",
-    values: ["all", "none", "exif", "icc", "xmp"],
+    choices: ["all", "none", "exif", "icc", "xmp"],
   },
 };
