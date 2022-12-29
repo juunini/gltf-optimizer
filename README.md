@@ -1,8 +1,19 @@
 <h1 align="center">GLTF Optimizer</h1>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/ThreeJs-black?style=for-the-badge&logo=three.js&logoColor=white" alt="ThreeJS" />
+  <img
+    src="https://repository-images.githubusercontent.com/581755148/ddc45675-c4cc-4436-bab4-fed0142e46db"
+    alt=""
+    width="300"
+    height="300"
+  />
+</div>
+
+<br />
+
+<div align="center">
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/GLTF-07C160?style=for-the-badge&logo=gltf&logoColor=white" alt="GLTF" />
 </div>
 
 ---
