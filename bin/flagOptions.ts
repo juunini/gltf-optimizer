@@ -111,7 +111,7 @@ export const flagOptions: { [key: string]: Options } = {
     default: false,
   },
   "texture.webp.enabled": {
-    describe: "",
+    describe: "Compress the texture using WebP.",
     type: "boolean",
     default: true,
   },
@@ -130,7 +130,7 @@ export const flagOptions: { [key: string]: Options } = {
     type: "number",
     default: 4,
   },
-  "texture,webp.size": {
+  "texture.webp.size": {
     describe: "Set target size in bytes.",
     type: "number",
   },
@@ -191,5 +191,6 @@ export const flagOptions: { [key: string]: Options } = {
     describe: "A list of metadata to copy from the input to the output if present.",
     type: "array",
     choices: ["all", "none", "exif", "icc", "xmp"],
+    default: ["none"],
   },
 };

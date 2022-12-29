@@ -1,0 +1,33 @@
+name: Deploy Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.19.0
+          node-version: 18.x
+
+      - uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - run: pnpm install
+        if: ${{ steps.pnpm-cache.outputs.cache-hit != 'true' }}
+
+      - run: pnpm build
+
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}

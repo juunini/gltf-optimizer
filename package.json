@@ -1,9 +1,12 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "module": "index.ts",
   "bin": {
     "gltf-optimizer": "./bin/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/imagemin": "^8.0.0",
