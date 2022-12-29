@@ -1,4 +1,6 @@
-export const flagOptions = {
+import { Options } from "yargs";
+
+export const flagOptions: { [key: string]: Options } = {
   input: {
     alias: "i",
     describe: "Path to the glTF or glb file.",
@@ -187,6 +189,7 @@ export const flagOptions = {
   },
   "texture.webp.metadata": {
     describe: "A list of metadata to copy from the input to the output if present.",
+    type: "array",
     choices: ["all", "none", "exif", "icc", "xmp"],
   },
 };
