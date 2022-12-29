@@ -1,6 +1,6 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "module": "index.ts",
   "bin": {
     "gltf-optimizer": "./bin/index.js"
