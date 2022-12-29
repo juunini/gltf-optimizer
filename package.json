@@ -2,7 +2,6 @@
   "name": "gltf-optimizer",
   "version": "0.0.1",
   "module": "index.ts",
-  "type": "module",
   "devDependencies": {
     "@types/imagemin": "^8.0.0",
     "@types/imagemin-webp": "^7.0.0",
