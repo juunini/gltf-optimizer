@@ -163,13 +163,27 @@ export const flagOptions = {
   },
   "texture.webp.crop": {
     describe: "Crop the image.",
-    type: "string",
-    example: "object { x: number, y: number, width: number, height: number }",
+  },
+  "texture.webp.crop.x": {
+    type: "number",
+  },
+  "texture.webp.crop.y": {
+    type: "number",
+  },
+  "texture.webp.crop.width": {
+    type: "number",
+  },
+  "texture.webp.crop.height": {
+    type: "number",
   },
   "texture.webp.resize": {
     describe: "Resize the image. Happens after crop.",
-    type: "string",
-    example: "object { width: number, height: number }",
+  },
+  "texture.webp.resize.width": {
+    type: "number",
+  },
+  "texture.webp.resize.height": {
+    type: "number",
   },
   "texture.webp.metadata": {
     describe: "A list of metadata to copy from the input to the output if present.",
