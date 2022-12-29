@@ -108,4 +108,70 @@ export const flagOptions = {
     type: "boolean",
     default: dracoDefaults.unifiedQuantization,
   },
+  "texture.webp.enabled": {
+    describe: "",
+    type: "boolean",
+    default: true,
+  },
+  "texture.webp.quality": {
+    describe: "Set quality factor between 0 and 100.",
+    type: "number",
+    default: 75,
+  },
+  "texture.webp.alphaQuality": {
+    describe: "Set transparency-compression quality between 0 and 100.",
+    type: "number",
+    default: 100,
+  },
+  "texture.webp.method": {
+    describe: "Specify the compression method to use, between 0 (fastest) and 6 (slowest). This parameter controls the trade off between encoding speed and the compressed file size and quality.",
+    type: "number",
+    default: 4,
+  },
+  "texture,webp.size": {
+    describe: "Set target size in bytes.",
+    type: "number",
+  },
+  "texture.webp.sns": {
+    describe: "Set the amplitude of spatial noise shaping between 0 and 100.",
+    type: "number",
+    default: 80,
+  },
+  "texture.webp.filter": {
+    describe: "Set deblocking filter strength between 0 (off) and 100.",
+    type: "number",
+  },
+  "texture.webp.autoFilter": {
+    describe: "Adjust filter strength automatically.",
+    type: "boolean",
+    default: false,
+  },
+  "texture.webp.sharpness": {
+    describe: "Set filter sharpness between 0 (sharpest) and 7 (least sharp).",
+    type: "number",
+    default: 0,
+  },
+  "texture.webp.lossless": {
+    describe: "Encode images losslessly.",
+    type: "boolean",
+    default: false,
+  },
+  "texture.webp.nearLossless": {
+    describe: "Encode losslessly with an additional lossy pre-processing step, with a quality factor between 0 (maximum pre-processing) and 100 (same as lossless).",
+    type: "number",
+    default: 100,
+  },
+  "texture.webp.crop": {
+    describe: "Crop the image.",
+    type: "object { x: number, y: number, width: number, height: number }",
+  },
+  "texture.webp.resize": {
+    describe: "Resize the image. Happens after crop.",
+    type: "object { width: number, height: number }",
+  },
+  "texture.webp.metadata": {
+    describe: "A list of metadata to copy from the input to the output if present.",
+    type: "string | string[]",
+    values: ["all", "none", "exif", "icc", "xmp"],
+  },
 };
