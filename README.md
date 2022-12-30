@@ -2,10 +2,9 @@
 
 <div align="center">
   <img
-    src="https://repository-images.githubusercontent.com/581755148/ddc45675-c4cc-4436-bab4-fed0142e46db"
+    src="https://repository-images.githubusercontent.com/581755148/e31793f8-a960-45f0-887e-fffe5f68677f"
     alt=""
     width="300"
-    height="300"
   />
 </div>
 

@@ -4,3 +4,19 @@ export function validateExtension (extension: string): void {
     process.exit(1)
   }
 }
+
+export type AllowedExtensions = '.gltf' | '.glb'
+
+export function getOutputExtension ({
+  inputExtension,
+  isJson,
+  isBinary
+}: {
+  inputExtension: AllowedExtensions
+  isJson: boolean
+  isBinary: boolean
+}): AllowedExtensions {
+  if (isJson) return '.gltf'
+  if (isBinary) return '.glb'
+  return inputExtension
+}

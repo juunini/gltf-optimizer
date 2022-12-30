@@ -1,4 +1,4 @@
-import { validateExtension } from './utils'
+import { getOutputExtension, validateExtension } from './utils'
 
 describe('validateExtension', () => {
   context('when extension is .gltf or .glb', () => {
@@ -17,6 +17,38 @@ describe('validateExtension', () => {
 
       expect(consoleSpy).toBeCalled()
       expect(exitSpy).toBeCalled()
+    })
+  })
+})
+
+describe('getOutputExtension', () => {
+  context('when isJson is true', () => {
+    it('returns .gltf', () => {
+      expect(getOutputExtension({
+        inputExtension: '.gltf',
+        isJson: true,
+        isBinary: false
+      })).toBe('.gltf')
+    })
+  })
+
+  context('when isBinary is true', () => {
+    it('returns .glb', () => {
+      expect(getOutputExtension({
+        inputExtension: '.gltf',
+        isJson: false,
+        isBinary: true
+      })).toBe('.glb')
+    })
+  })
+
+  context('when isJson and isBinary are false', () => {
+    it('returns inputExtension', () => {
+      expect(getOutputExtension({
+        inputExtension: '.gltf',
+        isJson: false,
+        isBinary: false
+      })).toBe('.gltf')
     })
   })
 })
