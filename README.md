@@ -16,6 +16,14 @@
   <img src="https://img.shields.io/badge/GLTF-07C160?style=for-the-badge&logo=gltf&logoColor=white" alt="GLTF" />
 </div>
 
+<br />
+
+<div align="center">
+  <a href="https://codecov.io/gh/juunini/gltf-optimizer" > 
+    <img src="https://codecov.io/gh/juunini/gltf-optimizer/branch/main/graph/badge.svg?token=46CB8BN45T"/> 
+  </a>
+</div>
+
 ---
 
 ## Caution
