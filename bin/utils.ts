@@ -7,7 +7,7 @@ export function exitWhenInvalidateExtension (extension: string): void {
 
 export type AllowedExtensions = '.gltf' | '.glb'
 
-export function getOutputExtension ({
+export function outputExtension ({
   inputExtension,
   isJson,
   isBinary

@@ -1,4 +1,4 @@
-import { getOutputExtension, exitWhenInvalidateExtension } from './utils'
+import { outputExtension, exitWhenInvalidateExtension } from './utils'
 
 describe('exitWhenInvalidateExtension', () => {
   context('when extension is .gltf or .glb', () => {
@@ -21,10 +21,10 @@ describe('exitWhenInvalidateExtension', () => {
   })
 })
 
-describe('getOutputExtension', () => {
+describe('outputExtension', () => {
   context('when isJson is true', () => {
     it('returns .gltf', () => {
-      expect(getOutputExtension({
+      expect(outputExtension({
         inputExtension: '.gltf',
         isJson: true,
         isBinary: false
@@ -34,7 +34,7 @@ describe('getOutputExtension', () => {
 
   context('when isBinary is true', () => {
     it('returns .glb', () => {
-      expect(getOutputExtension({
+      expect(outputExtension({
         inputExtension: '.gltf',
         isJson: false,
         isBinary: true
@@ -44,7 +44,7 @@ describe('getOutputExtension', () => {
 
   context('when isJson and isBinary are false', () => {
     it('returns inputExtension', () => {
-      expect(getOutputExtension({
+      expect(outputExtension({
         inputExtension: '.gltf',
         isJson: false,
         isBinary: false
