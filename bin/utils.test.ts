@@ -1,10 +1,10 @@
-import { getOutputExtension, validateExtension } from './utils'
+import { getOutputExtension, exitWhenInvalidateExtension } from './utils'
 
-describe('validateExtension', () => {
+describe('exitWhenInvalidateExtension', () => {
   context('when extension is .gltf or .glb', () => {
     it('nothing to happened', () => {
-      expect(validateExtension('.gltf')).toBeUndefined()
-      expect(validateExtension('.glb')).toBeUndefined()
+      expect(exitWhenInvalidateExtension('.gltf')).toBeUndefined()
+      expect(exitWhenInvalidateExtension('.glb')).toBeUndefined()
     })
   })
 
@@ -13,7 +13,7 @@ describe('validateExtension', () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined as never)
 
     it('calls process.exit', () => {
-      validateExtension('.txt')
+      exitWhenInvalidateExtension('.txt')
 
       expect(consoleSpy).toBeCalled()
       expect(exitSpy).toBeCalled()

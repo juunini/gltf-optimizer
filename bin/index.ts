@@ -4,7 +4,7 @@ import path from 'path'
 
 import type { AllowedExtensions } from './utils'
 import { flagOptions } from './flagOptions'
-import { getOutputExtension, validateExtension } from './utils'
+import { getOutputExtension, exitWhenInvalidateExtension } from './utils'
 
 const argv = yargs(process.argv.slice(2))
   .usage('Usage: gltf-optimizer -i inputPath -o outputPath')
@@ -22,7 +22,7 @@ const outputPath = (argv.output as string | undefined) ?? ''
 const inputDir = path.dirname(inputPath)
 const inputExtension = path.extname(inputPath).toLowerCase()
 
-validateExtension(inputExtension)
+exitWhenInvalidateExtension(inputExtension)
 
 const outputExtension = getOutputExtension({
   inputExtension: inputExtension as AllowedExtensions,
