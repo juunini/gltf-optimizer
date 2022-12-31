@@ -8,7 +8,8 @@ import {
   inputExtension,
   runOption,
   inputIsBinary,
-  outputIsBinary
+  outputIsBinary,
+  outputDirectory
 } from './utils'
 
 describe('exitWhenInvalidateExtension', () => {
@@ -28,6 +29,26 @@ describe('exitWhenInvalidateExtension', () => {
 
       expect(consoleSpy).toBeCalled()
       expect(exitSpy).toBeCalled()
+    })
+  })
+})
+
+describe('outputDirectory', () => {
+  context('when given output is undefined', () => {
+    it('returns .', () => {
+      expect(outputDirectory()).toBe('.')
+    })
+  })
+
+  context('when given output is a directory', () => {
+    it('returns output', () => {
+      expect(outputDirectory('test')).toBe('test')
+    })
+  })
+
+  context('when given output is a file', () => {
+    it('returns dirname of output', () => {
+      expect(outputDirectory('test/test.gltf')).toBe('test')
     })
   })
 })

@@ -10,6 +10,14 @@ export function exitWhenInvalidateExtension (extension: string): void {
   }
 }
 
+export function outputDirectory (output: any = '.'): string {
+  const outputDirectory = path.dirname(output)
+
+  return outputDirectory === '.'
+    ? path.basename(output)
+    : outputDirectory
+}
+
 export type AllowedExtensions = '.gltf' | '.glb'
 
 export function inputExtension (argv: Record<string, unknown>): string {

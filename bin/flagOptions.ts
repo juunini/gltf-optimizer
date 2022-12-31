@@ -67,7 +67,7 @@ export const flagOptions: Record<string, Options> = {
     describe:
       'Draco compression level [0-10], most is 10, least is 0. A value of 0 will apply sequential encoding and preserve face order.',
     type: 'number',
-    default: 7
+    default: 10
   },
   'draco.quantizePositionBits': {
     describe:
