@@ -3,7 +3,7 @@ import yargs from 'yargs'
 import path from 'path'
 
 import { flagOptions } from './flagOptions'
-import { exitWhenInvalidateExtension } from './utils'
+import { dracoOptions, exitWhenInvalidateExtension } from './utils'
 
 const argv = yargs(process.argv.slice(2))
   .usage('Usage: gltf-optimizer -i inputPath -o outputPath')
@@ -26,5 +26,16 @@ exitWhenInvalidateExtension(inputExtension)
 const outputDirectory = path.dirname(outputPath)
 const fileName = path.basename(inputPath, path.extname(inputPath))
 
+const options = {
+  resourceDirectory: inputDir,
+  separate: argv.separate,
+  separateTextures: argv.separateTextures,
+  stats: argv.stats,
+  keepUnusedElements: argv.keepUnusedElements,
+  keepLegacyExtensions: argv.keepLegacyExtensions,
+  name: fileName,
+  dracoOptions: dracoOptions(argv)
+}
+
 // Prevents eslint error
-console.log(inputDir, fileName, outputDirectory)
+console.log(outputDirectory, options)

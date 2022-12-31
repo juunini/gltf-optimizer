@@ -1,4 +1,4 @@
-import { outputExtension, exitWhenInvalidateExtension } from './utils'
+import { outputExtension, exitWhenInvalidateExtension, dracoOptions } from './utils'
 
 describe('exitWhenInvalidateExtension', () => {
   context('when extension is .gltf or .glb', () => {
@@ -49,6 +49,30 @@ describe('outputExtension', () => {
         isJson: false,
         isBinary: false
       })).toBe('.gltf')
+    })
+  })
+})
+
+describe('dracoOptions', () => {
+  context('when compressMeshes is false', () => {
+    it('returns undefined', () => {
+      expect(dracoOptions({
+        draco: {
+          compressMeshes: false
+        }
+      })).toBeUndefined()
+    })
+  })
+
+  context('when compressMeshes is true', () => {
+    it('returns draco', () => {
+      expect(dracoOptions({
+        draco: {
+          compressMeshes: true
+        }
+      })).toEqual({
+        compressMeshes: true
+      })
     })
   })
 })

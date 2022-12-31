@@ -61,7 +61,7 @@ export const flagOptions: Record<string, Options> = {
     describe:
       'Compress the meshes using Draco. Adds the KHR_draco_mesh_compression extension.',
     type: 'boolean',
-    default: false
+    default: true
   },
   'draco.compressionLevel': {
     describe:

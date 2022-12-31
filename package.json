@@ -31,6 +31,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "cesium": "^1.100.0",
     "flags": "^0.1.3",
     "gltf-pipeline": "^3.0.5",
     "imagemin": "^8.0.1",
