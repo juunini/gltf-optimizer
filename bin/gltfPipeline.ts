@@ -5,7 +5,7 @@ import gltfPipeline from 'gltf-pipeline'
 import fsExtra from 'fs-extra'
 import path from 'path'
 
-export function GLTFPipeline (argv: Record<string, unknown>): void {
+export async function GLTFPipeline (argv: Record<string, unknown>): Promise<any> {
   const inputPath = argv.input as string
   const inputDirectory = path.dirname(inputPath)
   const inputName = path.basename(inputPath, path.extname(inputPath))
@@ -17,8 +17,10 @@ export function GLTFPipeline (argv: Record<string, unknown>): void {
   }
 
   // TODO: Will be fix `.glb` extension only
-  const outputPath = path.join(path.basename(argv.output as string), inputName + '.glb')
-  console.log(argv.output, path.dirname(argv.output as string), inputName, outputPath)
+  const outputPath = path.join(
+    path.basename(argv.output as string),
+    `${inputName}${argv.json === true ? '.gltf' : '.glb'}`
+  )
   const outputDirectory = path.dirname(outputPath)
   const outputName = path.basename(outputPath, path.extname(outputPath))
   const outputExtension = path.extname(outputPath).toLowerCase()
@@ -74,7 +76,7 @@ export function GLTFPipeline (argv: Record<string, unknown>): void {
 
   console.time('Total')
 
-  read(inputPath)
+  return await read(inputPath)
     .then(function (gltf) {
       return run(gltf, options)
     })

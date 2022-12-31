@@ -25,26 +25,24 @@
 
 ---
 
-## Caution
-
-This is not yet usable production version.  
-Sample glb file from https://sketchfab.com/3d-models/472b965ae78244ad99e08528e52f3b6f
-
 ## Introduce
 
-Developing a tool that optimizes GLTF in one run.  
-Draco compression of GLTF, transforming Texture into Webp.
+Optimize GLTF.  
+Draco compress and convert texture to WebP.  
+
+Using [gltf-pipeline](https://github.com/CesiumGS/gltf-pipeline) and [imagemin-webp](https://github.com/imagemin/imagemin-webp)
 
 ## Install
 
 ```bash
-$ npm install --global gltf-optimizer
+npm install --global gltf-optimizer
 ```
 
 ## Usage
 
 ```bash
-$ gltf-optimizer --help
+gltf-optimizer -i model.gltf
+gltf-optimizer -i model.glb -o ./output
 ```
 
 ## Command-Line Flags
@@ -54,10 +52,6 @@ $ gltf-optimizer --help
 |`--help`, `-h`|Display help|No|
 |`--input`, `-i`|Path to the glTF or glb file.|:white_check_mark: Yes|
 |`--output`, `-o`|Output path of the glTF or glb file. Separate resources will be saved to the same directory.|No|
-|`--binary`, `-b`|Convert the input glTF to glb.|No, default `false`|
-|`--json`, `-j`|Convert the input glb to glTF.|No, default `false`|
-|`--separate`, `-s`|Write separate buffers, shaders, and textures instead of embedding them in the glTF.|No, default `false`|
-|`--separateTextures`, `-t`|Write out separate textures only.|No, default `false`|
 |`--stats`|Print statistics to console for output glTF file.|No, default `false`|
 |`--keepUnusedElements`|Keep unused materials, nodes and meshes.|No, default `false`|
 |`--keepLegacyExtensions`|When false, materials with `KHR_techniques_webgl`, `KHR_blend`, or `KHR_materials_common` will be converted to PBR.|No, default `false`|
@@ -72,7 +66,7 @@ $ gltf-optimizer --help
 |`--texture.webp.enabled`|Compress the texture using WebP.|No, default `true`|
 |`--texture.webp.quality`|Set quality factor between 0 and 100.|No, default `75`|
 |`--texture.webp.alphaQuality`|Set transparency-compression quality between 0 and 100.|No, default `100`|
-|`--texture.webp.method`|Specify the compression method to use, between 0 (fastest) and 6 (slowest). This parameter controls the trade off between encoding speed and the compressed file size and quality.|No, default `4`|
+|`--texture.webp.method`|Specify the compression method to use, between 0 (fastest) and 6 (slowest). This parameter controls the trade off between encoding speed and the compressed file size and quality.|No, default `6`|
 |`--texture.webp.size`|Set target size in bytes.|No|
 |`--texture.webp.sns`|Set the amplitude of spatial noise shaping between 0 and 100.|No, default `80`|
 |`--texture.webp.filter`|Set deblocking filter strength between 0 (off) and 100.|No|
