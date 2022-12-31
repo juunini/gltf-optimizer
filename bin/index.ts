@@ -26,14 +26,15 @@ const argv = yargs(process.argv.slice(2))
   .options(flagOptions)
   .parseSync()
 
-const inputPath = argv.input as string
-
+const inputPath = path.normalize(argv.input as string)
 const inputDirectory = path.dirname(inputPath)
 
 exitWhenInvalidateExtension(inputExtension(argv))
 
 const fileName = path.basename(inputPath, path.extname(inputPath))
-const outputPath = path.join(outputDirectory(argv.output), fileName + outputExtension(argv))
+const outputPath = path.join(outputDirectory(argv.output), `${fileName}${outputExtension(argv)}`) === inputPath
+  ? path.join(outputDirectory(argv.output), `${fileName}-optimized${outputExtension(argv)}`)
+  : path.join(outputDirectory(argv.output), `${fileName}${outputExtension(argv)}`)
 
 const options = {
   resourceDirectory: inputDirectory,
@@ -58,6 +59,7 @@ export function saveSeparateResources (separateResources: Record<string, unknown
     if (Object.prototype.hasOwnProperty.call(separateResources, relativePath)) {
       const resource = separateResources[relativePath]
       const resourcePath = path.join(outputDirectory(argv.output), relativePath)
+      console.log(resourcePath)
       resourcePromises.push(fsExtra.outputFile(resourcePath, resource))
     }
   })
@@ -78,7 +80,29 @@ read(inputPath)
     ])
   })
   .then(() => console.timeEnd('Total'))
-  .catch(function (error) {
+  .catch((error: Error) => {
+    if (error.message === 'Error: Draco encoding failed.') {
+      options.dracoOptions = undefined
+
+      read(inputPath)
+        .then((gltf) => run(gltf, options))
+        .then(async (results) => {
+          const gltf = defaultValue(results.gltf, results.glb)
+          const separateResources = results.separateResources
+          return await Promise.all([
+            write(outputPath, gltf, writeOptions),
+            saveSeparateResources(separateResources)
+          ])
+        })
+        .then(() => console.timeEnd('Total'))
+        .catch((error) => {
+          console.log(error)
+          process.exit(1)
+        })
+
+      return
+    }
+
     console.log(error)
     process.exit(1)
   })
