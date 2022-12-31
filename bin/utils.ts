@@ -1,6 +1,7 @@
 import path from 'path'
+// @ts-ignore
 import { defaultValue } from 'cesium'
-// @ts-expect-error
+// @ts-ignore
 import gltfPipeline from 'gltf-pipeline'
 
 export function exitWhenInvalidateExtension (extension: string): void {

@@ -2,6 +2,7 @@
   "name": "gltf-optimizer",
   "version": "0.1.0",
   "module": "index.ts",
+  "type": "module",
   "bin": {
     "gltf-optimizer": "./bin/index.js"
   },

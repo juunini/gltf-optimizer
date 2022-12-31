@@ -4,23 +4,23 @@ module.exports = {
     '**/*.{ts,tsx}',
     '!**/*.d.ts',
     '!**/*.js',
-    '!**/node_modules/**',
+    '!**/node_modules/**'
   ],
   testMatch: [
-    '**/?(*.)+(spec|test).ts?(x)',
+    '**/?(*.)+(spec|test).ts?(x)'
   ],
   setupFilesAfterEnv: [
-    'jest-plugin-context/setup',
+    'jest-plugin-context/setup'
   ],
   testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
+    '<rootDir>/node_modules/'
   ],
   transformIgnorePatterns: [
     '/node_modules/',
-    '/__snapshots__/',
+    '/__snapshots__/'
   ],
   transform: {
-    "^.+\\.(t|j)sx?$": ["@swc/jest"],
+    '^.+\\.(t|j)s?$': ['@swc/jest']
   },
   coveragePathIgnorePatterns: [
     '/node_modules/',
@@ -28,14 +28,15 @@ module.exports = {
     '/__snapshots__/',
     'bin/index.ts',
     'bin/flagOptions.ts',
+    'bin/gltfPipeline.ts'
   ],
   coverageThreshold: {
     global: {
       branches: 100,
       functions: 100,
       lines: 100,
-      statements: 100,
-    },
+      statements: 100
+    }
   },
-  moduleNameMapper: {},
-};
+  moduleNameMapper: {}
+}

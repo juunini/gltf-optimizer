@@ -16,5 +16,6 @@ module.exports = {
     '*.d.ts'
   ],
   rules: {
+    '@typescript-eslint/prefer-ts-expect-error': 'off'
   }
 }
