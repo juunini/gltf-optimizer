@@ -7,13 +7,15 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
-    "test": "jest",
-    "test:cov": "jest --coverage",
+    "test": "pnpm test:prevent && jest",
+    "test:cov": "pnpm test:prevent && jest --coverage",
+    "test:prevent": "rimraf bin/*.js && rimraf bin/*.d.ts",
     "lint": "eslint --ext .ts ."
   },
   "devDependencies": {
     "@swc/core": "^1.3.24",
     "@swc/jest": "^0.2.24",
+    "@types/fs-extra": "^9.0.13",
     "@types/imagemin": "^8.0.0",
     "@types/imagemin-webp": "^7.0.0",
     "@types/jest": "^29.2.4",
@@ -33,6 +35,7 @@
   "dependencies": {
     "cesium": "^1.100.0",
     "flags": "^0.1.3",
+    "fs-extra": "^11.1.0",
     "gltf-pipeline": "^3.0.5",
     "imagemin": "^8.0.1",
     "imagemin-webp": "^7.0.0",
