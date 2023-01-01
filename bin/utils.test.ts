@@ -1,17 +1,21 @@
-// @ts-expect-error
-import gltfPipeline from 'gltf-pipeline'
+import fs from 'fs'
+import fsExtra from 'fs-extra'
 
 import {
   outputExtension,
   exitWhenInvalidateExtension,
   dracoOptions,
   inputExtension,
-  runOption,
   inputIsBinary,
   outputIsBinary,
   outputDirectory,
-  inputName
+  inputName,
+  replaceTextImageToWebP,
+  removeAllWithoutExtension
 } from './utils'
+
+jest.mock('fs')
+jest.mock('fs-extra')
 
 describe('exitWhenInvalidateExtension', () => {
   context('when extension is .gltf or .glb', () => {
@@ -170,40 +174,26 @@ describe('outputIsBinary', () => {
   })
 })
 
-describe('runOption', () => {
-  context('when input and output is binary', () => {
-    it('returns processGlb', () => {
-      expect(runOption({
-        input: 'test.glb',
-        binary: true
-      })).toBe(gltfPipeline.processGlb)
-    })
-  })
+describe('replaceTextImageToWebP', () => {
+  const givenFileContents = 'image/png\ntest.png'
+  const givenFileName = 'test.gltf'
+  const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined as never);
+  (fs.readFileSync as jest.Mock) = jest.fn(() => givenFileContents)
 
-  context('when input is binary and output is not binary', () => {
-    it('returns glbToGltf', () => {
-      expect(runOption({
-        input: 'test.glb',
-        json: true
-      })).toBe(gltfPipeline.glbToGltf)
-    })
-  })
+  it('replace png to webp in file', () => {
+    replaceTextImageToWebP(givenFileName)
 
-  context('when input is not binary and output is binary', () => {
-    it('returns gltfToGlb', () => {
-      expect(runOption({
-        input: 'test.gltf',
-        binary: true
-      })).toBe(gltfPipeline.gltfToGlb)
-    })
+    expect(writeFileSyncSpy).toBeCalledWith(givenFileName, givenFileContents.replaceAll('png', 'webp'))
   })
+})
 
-  context('when input and output is not binary', () => {
-    it('returns processGltf', () => {
-      expect(runOption({
-        input: 'test.gltf',
-        json: true
-      })).toBe(gltfPipeline.processGltf)
-    })
+describe('removeAllWithoutExtension', () => {
+  (fs.readdirSync as jest.Mock) = jest.fn(() => ['test.gltf', 'test.glb'])
+  const removeSyncSpy = jest.spyOn(fsExtra, 'removeSync').mockImplementation(() => undefined as never)
+
+  it('remove all files except glb', () => {
+    removeAllWithoutExtension('output', '.glb')
+
+    expect(removeSyncSpy).toBeCalledWith('output/test.gltf')
   })
 })

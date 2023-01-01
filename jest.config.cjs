@@ -28,7 +28,8 @@ module.exports = {
     '/__snapshots__/',
     'bin/index.ts',
     'bin/flagOptions.ts',
-    'bin/gltfPipeline.ts'
+    'bin/gltfPipeline.ts',
+    'bin/utilsCoverageIgnore.ts'
   ],
   coverageThreshold: {
     global: {

@@ -1,8 +1,8 @@
 import path from 'path'
 // @ts-ignore
 import { defaultValue } from 'cesium'
-// @ts-ignore
-import gltfPipeline from 'gltf-pipeline'
+import fs from 'fs'
+import fsExtra from 'fs-extra'
 
 export function exitWhenInvalidateExtension (extension: string): void {
   if (extension !== '.gltf' && extension !== '.glb') {
@@ -53,12 +53,20 @@ export function outputIsBinary (argv: Record<string, unknown>): boolean {
   return outputExtension(argv) === '.glb'
 }
 
-export function runOption (argv: Record<string, unknown>): (gltf: any, options: any) => any {
-  if (inputIsBinary(argv) && outputIsBinary(argv)) return gltfPipeline.processGlb
+export function replaceTextImageToWebP (filePath: string): void {
+  fs.writeFileSync(
+    filePath,
+    fs.readFileSync(filePath, 'utf8')
+      .replaceAll('.png', '.webp')
+      .replaceAll('.jpg', '.webp')
+      .replaceAll('.jpeg', '.webp')
+      .replaceAll('image/png', 'image/webp')
+      .replaceAll('image/jpeg', 'image/webp')
+  )
+}
 
-  if (inputIsBinary(argv) && !outputIsBinary(argv)) return gltfPipeline.glbToGltf
-
-  if (!inputIsBinary(argv) && outputIsBinary(argv)) return gltfPipeline.gltfToGlb
-
-  return gltfPipeline.processGltf
+export function removeAllWithoutExtension (outputDirectory: string, extension: string): void {
+  fs.readdirSync(outputDirectory)
+    .filter((file) => path.extname(file) !== extension)
+    .forEach((file) => fsExtra.removeSync(`${outputDirectory}/${file}`))
 }
