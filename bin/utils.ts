@@ -11,12 +11,16 @@ export function exitWhenInvalidateExtension (extension: string): void {
   }
 }
 
-export function outputDirectory (output: any = '.'): string {
-  const outputDirectory = path.dirname(output)
+export function inputName (argv: Record<string, unknown>): string {
+  return path.basename(argv.input as string, path.extname(argv.input as string))
+}
 
-  return outputDirectory === '.'
-    ? path.basename(output)
-    : outputDirectory
+export function outputDirectory (argv: Record<string, unknown>): string {
+  const directory = path.dirname(argv.output as string ?? '.')
+
+  return directory === '.'
+    ? path.basename(argv.output as string ?? '.')
+    : directory
 }
 
 export type AllowedExtensions = '.gltf' | '.glb'

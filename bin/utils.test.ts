@@ -9,7 +9,8 @@ import {
   runOption,
   inputIsBinary,
   outputIsBinary,
-  outputDirectory
+  outputDirectory,
+  inputName
 } from './utils'
 
 describe('exitWhenInvalidateExtension', () => {
@@ -33,22 +34,30 @@ describe('exitWhenInvalidateExtension', () => {
   })
 })
 
+describe('inputName', () => {
+  it('returns input name', () => {
+    expect(inputName({
+      input: 'test.gltf'
+    })).toBe('test')
+  })
+})
+
 describe('outputDirectory', () => {
   context('when given output is undefined', () => {
     it('returns .', () => {
-      expect(outputDirectory()).toBe('.')
+      expect(outputDirectory({})).toBe('.')
     })
   })
 
   context('when given output is a directory', () => {
     it('returns output', () => {
-      expect(outputDirectory('test')).toBe('test')
+      expect(outputDirectory({ output: 'test' })).toBe('test')
     })
   })
 
   context('when given output is a file', () => {
     it('returns dirname of output', () => {
-      expect(outputDirectory('test/test.gltf')).toBe('test')
+      expect(outputDirectory({ output: 'test/test.gltf' })).toBe('test')
     })
   })
 })

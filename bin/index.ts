@@ -8,6 +8,7 @@ import imageminWebp from 'imagemin-webp'
 
 import { flagOptions } from './flagOptions.js'
 import { GLTFPipeline } from './gltfPipeline.js'
+import { inputName, outputDirectory } from './utils.js'
 
 const argv = yargs(process.argv.slice(2))
   .usage('Usage: gltf-optimizer -i inputPath -o outputPath')
@@ -18,13 +19,14 @@ const argv = yargs(process.argv.slice(2))
   .options(flagOptions)
   .parseSync()
 
-void GLTFPipeline({ ...argv, separate: true, json: true })
+const fileName = inputName(argv)
+const outputDir = outputDirectory(argv)
+const outputFileName = (extension: string): string => `${outputDir}/${fileName}${extension}`
+
+void GLTFPipeline({ ...argv, separate: true, json: true, binary: false })
   .then(() => {
-    const inputPath = argv.input as string
-    const inputName = path.basename(inputPath, path.extname(inputPath))
-    const outputPath = path.basename(argv.output as string)
-    const gltf = fsExtra.readJSONSync(`${outputPath}/${inputName}.gltf`)
-    const textures = gltf.images.map((image: any) => `${outputPath}/${image.uri as string}`)
+    const gltf = fsExtra.readJSONSync(outputFileName('.gltf'))
+    const textures = gltf.images.map((image: any) => `${outputDir}/${image.uri as string}`)
 
     // @ts-ignore
     return imagemin(textures, {
@@ -33,41 +35,27 @@ void GLTFPipeline({ ...argv, separate: true, json: true })
       plugins: [imageminWebp({ ...argv.texture.webp })]
     })
   })
-  .then(() => {
-    const inputPath = argv.input as string
-    const inputName = path.basename(inputPath, path.extname(inputPath))
-    const outputPath = path.basename(argv.output as string)
-    const gltf = fs.readFileSync(`${outputPath}/${inputName}.gltf`, 'utf8')
+  .then(() =>
     fs.writeFileSync(
-      `${outputPath}/${inputName}.gltf`,
-      gltf
+      outputFileName('.gltf'),
+      fs.readFileSync(outputFileName('.gltf'), 'utf8')
         .replaceAll('.png', '.webp')
         .replaceAll('.jpg', '.webp')
         .replaceAll('.jpeg', '.webp')
         .replaceAll('image/png', 'image/webp')
         .replaceAll('image/jpeg', 'image/webp')
     )
-  })
-  .then(async () => {
-    const inputPath = argv.input as string
-    const inputName = path.basename(inputPath, path.extname(inputPath))
-    const input = path.join(
-      path.basename(argv.output as string),
-      `${inputName}.gltf`
-    )
-
-    return await GLTFPipeline({ ...argv, input, binary: true, draco: { compressMeshes: false } })
-  })
-  .then(() => {
-    const inputPath = argv.input as string
-    const inputName = path.basename(inputPath, path.extname(inputPath))
-    const outputPath = path.join(
-      path.basename(argv.output as string),
-      `${inputName}${argv.json === true ? '.gltf' : '.glb'}`
-    )
-    const outputDirectory = path.dirname(outputPath)
-
-    fs.readdirSync(outputDirectory)
+  )
+  .then(async () => await GLTFPipeline({
+    ...argv,
+    input: outputFileName('.gltf'),
+    separate: false,
+    binary: true,
+    json: false,
+    draco: { compressMeshes: false }
+  }))
+  .then(() =>
+    fs.readdirSync(outputDir)
       .filter((file) => path.extname(file) !== '.glb')
-      .forEach((file) => fsExtra.removeSync(`${outputDirectory}/${file}`))
-  })
+      .forEach((file) => fsExtra.removeSync(`${outputDir}/${file}`))
+  )
