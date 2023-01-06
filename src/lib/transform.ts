@@ -6,7 +6,8 @@ import {
   simplify,
   weld,
   prune,
-  dedup
+  dedup,
+  webp
 } from '@gltf-transform/functions'
 
 export interface TransformOptions {
@@ -28,7 +29,8 @@ export async function transform (
     draco: _draco,
     weld: _weld,
     simplify: _simplify
-  }: TransformOptions
+  }: TransformOptions,
+  isNode: boolean
 ): Promise<Document> {
   await MeshoptEncoder.ready
 
@@ -38,6 +40,7 @@ export async function transform (
     simplify({ simplifier: MeshoptSimplifier, ratio: _simplify.ratio, error: _simplify.error }),
     reorder({ encoder: MeshoptEncoder }),
     prune(),
-    dedup({ propertyTypes: [PropertyType.MESH] })
+    dedup({ propertyTypes: [PropertyType.MESH] }),
+    isNode ? webp({ squoosh: require('@squoosh/lib') }) : () => {},
   )
 }

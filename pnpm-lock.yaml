@@ -4,6 +4,7 @@ specifiers:
   '@gltf-transform/core': ^2.4.7
   '@gltf-transform/extensions': ^2.4.7
   '@gltf-transform/functions': ^2.4.7
+  '@squoosh/lib': ^0.5.3
   '@swc/core': ^1.3.24
   '@swc/jest': ^0.2.24
   '@types/draco3d': ^1.4.2
@@ -37,6 +38,7 @@ dependencies:
   '@gltf-transform/core': 2.5.1
   '@gltf-transform/extensions': 2.5.1
   '@gltf-transform/functions': 2.5.1
+  '@squoosh/lib': 0.5.3
   cesium: 1.101.0
   draco3d: 1.5.5
   fs-extra: 11.1.0
@@ -878,6 +880,14 @@ packages:
     dependencies:
       '@sinonjs/commons': 1.8.6
     dev: true
+
+  /@squoosh/lib/0.5.3:
+    resolution: {integrity: sha512-d/yn6M0P5rk+L0QOl/hzvlHDqXCCmEvwdcYu7sXwhyYDNskg9oxlZtZTBaKKbX6Vq0rzajI9GZkDC0zXlz/oRw==}
+    engines: {node: ' ^12.5.0 || ^14.0.0 || ^16.0.0 '}
+    dependencies:
+      wasm-feature-detect: 1.4.0
+      web-streams-polyfill: 3.2.1
+    dev: false
 
   /@swc/core-darwin-arm64/1.3.25:
     resolution: {integrity: sha512-8PWAVcjTJyj2VrqPBFOIi2w2P0Z8kOCbzHW3+pe+bSXxfGMG0MKPl5U2IXhsEL0ovm4xSFlqW0yygpoP3MmRPw==}
@@ -5434,6 +5444,15 @@ packages:
     dependencies:
       makeerror: 1.0.12
     dev: true
+
+  /wasm-feature-detect/1.4.0:
+    resolution: {integrity: sha512-9z4Yk3SeHQdb7E4g6ywQYcUt1CHr9HFiCIA5h29rv0gmW4lCE5dnDhheiJI5qzVPSDnXHyXQPLGPyucsuIzacw==}
+    dev: false
+
+  /web-streams-polyfill/3.2.1:
+    resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
+    engines: {node: '>= 8'}
+    dev: false
 
   /webp-converter-browser/1.0.3:
     resolution: {integrity: sha512-wCHoU6emfBWBTgcPNZKFH4jrx0Y3IDW3Vcp799MpyQwJyPnI0QTIYDiFxNX3FQ4T2FnFO7a9ZTZpzZoKoN/yqA==}

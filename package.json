@@ -41,6 +41,7 @@
     "@gltf-transform/core": "^2.4.7",
     "@gltf-transform/extensions": "^2.4.7",
     "@gltf-transform/functions": "^2.4.7",
+    "@squoosh/lib": "^0.5.3",
     "cesium": "^1.100.0",
     "draco3d": "^1.5.5",
     "fs-extra": "^11.1.0",
