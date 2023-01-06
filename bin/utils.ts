@@ -1,8 +1,5 @@
 import path from 'path'
-// @ts-ignore
-import { defaultValue } from 'cesium'
 import fs from 'fs'
-import fsExtra from 'fs-extra'
 
 export function exitWhenInvalidateExtension (extension: string): void {
   if (extension !== '.gltf' && extension !== '.glb') {
@@ -37,14 +34,6 @@ export function outputExtension (argv: Record<string, unknown>): AllowedExtensio
   return path.extname(argv.input as string).toLowerCase() as AllowedExtensions
 }
 
-export function dracoOptions (argv: Record<string, unknown>): Record<string, unknown> | undefined {
-  if ((argv.draco as Record<string, unknown>).compressMeshes === false) {
-    return undefined
-  }
-
-  return defaultValue(argv.draco, {})
-}
-
 export function inputIsBinary (argv: Record<string, unknown>): boolean {
   return inputExtension(argv) === '.glb'
 }
@@ -63,10 +52,4 @@ export function replaceTextImageToWebP (filePath: string): void {
       .replaceAll('image/png', 'image/webp')
       .replaceAll('image/jpeg', 'image/webp')
   )
-}
-
-export function removeAllWithoutExtension (outputDirectory: string, extension: string): void {
-  fs.readdirSync(outputDirectory)
-    .filter((file) => path.extname(file) !== extension)
-    .forEach((file) => fsExtra.removeSync(`${outputDirectory}/${file}`))
 }

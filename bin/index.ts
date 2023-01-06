@@ -1,38 +1,43 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
+import fs from 'fs'
 
-import { flagOptions } from './flagOptions.js'
-import { GLTFPipeline } from './gltfPipeline.js'
-import {
-  inputName,
-  outputDirectory,
-  removeAllWithoutExtension,
-  replaceTextImageToWebP
-} from './utils.js'
-import { convertImageToWebP } from './utilsCoverageIgnore.js'
+import { flagOptions } from './flagOptions'
+import { optimizer } from '../src/index'
+import { outputDirectory } from './utils'
 
 const argv = yargs(process.argv.slice(2))
   .usage('Usage: gltf-optimizer -i inputPath -o outputPath')
-  .example('gltf-optimizer', '-i model.gltf')
+  .example('gltf-optimizer', '-i model.glb')
   .example('gltf-optimizer', '-i model.glb -o ./output')
   .help('h')
   .alias('h', 'help')
   .options(flagOptions)
   .parseSync()
 
-const fileName = inputName(argv)
-const outputDir = outputDirectory(argv)
-const outputFileName = (extension: string): string => `${outputDir}/${fileName}${extension}`
+const glb = fs.readFileSync(argv.input as string)
 
-void GLTFPipeline({ ...argv, separate: true, json: true, binary: false })
-  .then(async () => await convertImageToWebP(outputFileName('.gltf'), (argv.texture as any).webp))
-  .then(() => replaceTextImageToWebP(outputFileName('.gltf')))
-  .then(async () => await GLTFPipeline({
-    ...argv,
-    input: outputFileName('.gltf'),
-    separate: false,
-    binary: true,
-    json: false,
-    draco: { compressMeshes: false }
-  }))
-  .then(() => removeAllWithoutExtension(outputDir, '.glb'))
+optimizer.node(glb, {
+  emissiveStrength: argv.emissiveStrength as number,
+  transform: {
+    draco: {
+      method: (argv.draco as any).method as any
+    },
+    weld: {
+      tolerance: (argv.weld as any).tolerance as number
+    },
+    simplify: {
+      ratio: (argv.simplify as any).ratio as number,
+      error: (argv.simplify as any).error as number
+    }
+  }
+})
+  .then((result) => {
+    const outputDir = outputDirectory(argv)
+
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir)
+    }
+
+    fs.writeFileSync(`${outputDir}/compressed.glb`, result)
+  })

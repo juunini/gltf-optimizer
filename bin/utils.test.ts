@@ -1,21 +1,17 @@
 import fs from 'fs'
-import fsExtra from 'fs-extra'
 
 import {
   outputExtension,
   exitWhenInvalidateExtension,
-  dracoOptions,
   inputExtension,
   inputIsBinary,
   outputIsBinary,
   outputDirectory,
   inputName,
   replaceTextImageToWebP,
-  removeAllWithoutExtension
 } from './utils'
 
 jest.mock('fs')
-jest.mock('fs-extra')
 
 describe('exitWhenInvalidateExtension', () => {
   context('when extension is .gltf or .glb', () => {
@@ -112,30 +108,6 @@ describe('outputExtension', () => {
   })
 })
 
-describe('dracoOptions', () => {
-  context('when compressMeshes is false', () => {
-    it('returns undefined', () => {
-      expect(dracoOptions({
-        draco: {
-          compressMeshes: false
-        }
-      })).toBeUndefined()
-    })
-  })
-
-  context('when compressMeshes is true', () => {
-    it('returns draco', () => {
-      expect(dracoOptions({
-        draco: {
-          compressMeshes: true
-        }
-      })).toEqual({
-        compressMeshes: true
-      })
-    })
-  })
-})
-
 describe('inputIsBinary', () => {
   context('when inputExtension is .glb', () => {
     it('returns true', () => {
@@ -184,16 +156,5 @@ describe('replaceTextImageToWebP', () => {
     replaceTextImageToWebP(givenFileName)
 
     expect(writeFileSyncSpy).toBeCalledWith(givenFileName, givenFileContents.replaceAll('png', 'webp'))
-  })
-})
-
-describe('removeAllWithoutExtension', () => {
-  (fs.readdirSync as jest.Mock) = jest.fn(() => ['test.gltf', 'test.glb'])
-  const removeSyncSpy = jest.spyOn(fsExtra, 'removeSync').mockImplementation(() => undefined as never)
-
-  it('remove all files except glb', () => {
-    removeAllWithoutExtension('output', '.glb')
-
-    expect(removeSyncSpy).toBeCalledWith('output/test.gltf')
   })
 })
