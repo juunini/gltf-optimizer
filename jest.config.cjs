@@ -27,9 +27,7 @@ module.exports = {
     '.js',
     '/__snapshots__/',
     'bin/index.ts',
-    'bin/flagOptions.ts',
-    'bin/gltfPipeline.ts',
-    'bin/utilsCoverageIgnore.ts'
+    'bin/flagOptions.ts'
   ],
   moduleNameMapper: {}
 }

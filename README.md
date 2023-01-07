@@ -45,6 +45,24 @@ npm install --global gltf-optimizer
 
 ## Usage
 
+```ts
+import { optimizer } from 'gltf-optimizer'
+
+// ...
+
+// node (backend side)
+const glb = fs.readFileSync('./target.glb')
+const optimized = await optimizer.node(glb, { /* options */ })
+fs.writeFileSync('./compressed.glb', optimized)
+
+// browser (frontend side)
+const optimized = await optimizer.web(glb, { /* options */ })
+// if using get-file-using-a-tag (https://github.com/juunini/get-file-using-a-tag)
+download({ fileName: 'compressed.glb', arrayBuffer: optimized })
+```
+
+## Usage(CLI)
+
 ```bash
 gltf-optimizer -i model.glb
 gltf-optimizer -i model.glb -o ./output

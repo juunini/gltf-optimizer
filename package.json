@@ -1,6 +1,6 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Optimize glTF model",
   "homepage": "https://github.com/juunini/gltf-optimizer",
   "repository": "juunini/gltf-optimizer",
@@ -14,9 +14,9 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
-    "test": "pnpm test:prevent && jest",
-    "test:cov": "pnpm test:prevent && jest --coverage",
-    "test:prevent": "rimraf bin/*.js && rimraf bin/*.d.ts",
+    "test": "pnpm clear && jest",
+    "test:cov": "pnpm clear && jest --coverage",
+    "clear": "rimraf bin/*.js && rimraf bin/*.d.ts && rimraf src/**/*.js && rimraf src/**/*.d.ts",
     "lint": "eslint --ext .ts ."
   },
   "devDependencies": {
