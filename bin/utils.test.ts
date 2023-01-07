@@ -1,51 +1,29 @@
-import fs from 'fs'
-
-import {
-  outputExtension,
-  exitWhenInvalidateExtension,
-  inputExtension,
-  inputIsBinary,
-  outputIsBinary,
-  outputDirectory,
-  inputName,
-  replaceTextImageToWebP,
-} from './utils'
+import { outputDirectory } from './utils'
 
 jest.mock('fs')
-
-describe('exitWhenInvalidateExtension', () => {
-  context('when extension is .gltf or .glb', () => {
-    it('nothing to happened', () => {
-      expect(exitWhenInvalidateExtension('.gltf')).toBeUndefined()
-      expect(exitWhenInvalidateExtension('.glb')).toBeUndefined()
-    })
-  })
-
-  context('when extension is not .gltf or .glb', () => {
-    const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => undefined as never)
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined as never)
-
-    it('calls process.exit', () => {
-      exitWhenInvalidateExtension('.txt')
-
-      expect(consoleSpy).toBeCalled()
-      expect(exitSpy).toBeCalled()
-    })
-  })
-})
-
-describe('inputName', () => {
-  it('returns input name', () => {
-    expect(inputName({
-      input: 'test.gltf'
-    })).toBe('test')
-  })
-})
 
 describe('outputDirectory', () => {
   context('when given output is undefined', () => {
     it('returns .', () => {
       expect(outputDirectory({})).toBe('.')
+    })
+  })
+
+  context('when given output is empty string', () => {
+    it('returns .', () => {
+      expect(outputDirectory({ output: '' })).toBe('.')
+    })
+  })
+
+  context('when given output is .', () => {
+    it('returns .', () => {
+      expect(outputDirectory({ output: '.' })).toBe('.')
+    })
+  })
+
+  context('when given output is ./', () => {
+    it('returns .', () => {
+      expect(outputDirectory({ output: './' })).toBe('.')
     })
   })
 
@@ -60,101 +38,16 @@ describe('outputDirectory', () => {
       expect(outputDirectory({ output: 'test/test.gltf' })).toBe('test')
     })
   })
-})
 
-describe('inputExtension', () => {
-  it('returns .gltf', () => {
-    expect(inputExtension({
-      input: 'test.gltf'
-    })).toBe('.gltf')
-  })
-
-  it('returns .glb', () => {
-    expect(inputExtension({
-      input: 'test.glb'
-    })).toBe('.glb')
-  })
-})
-
-describe('outputExtension', () => {
-  context('when json is true', () => {
-    it('returns .gltf', () => {
-      expect(outputExtension({
-        input: 'test.gltf',
-        json: true,
-        binary: false
-      })).toBe('.gltf')
+  context('when given output is root directory', () => {
+    it('returns basename of output', () => {
+      expect(outputDirectory({ output: '/test.gltf' })).toBe('/')
     })
   })
 
-  context('when binary is true', () => {
-    it('returns .glb', () => {
-      expect(outputExtension({
-        input: 'test.gltf',
-        json: false,
-        binary: true
-      })).toBe('.glb')
+  context('when given output is from root directory', () => {
+    it('returns basename of output', () => {
+      expect(outputDirectory({ output: '/test/test.gltf' })).toBe('/test')
     })
-  })
-
-  context('when json and binary are false', () => {
-    it('returns inputExtension', () => {
-      expect(outputExtension({
-        input: 'test.gltf',
-        json: false,
-        binary: false
-      })).toBe('.gltf')
-    })
-  })
-})
-
-describe('inputIsBinary', () => {
-  context('when inputExtension is .glb', () => {
-    it('returns true', () => {
-      expect(inputIsBinary({
-        input: 'test.glb'
-      })).toBeTruthy()
-    })
-  })
-
-  context('when inputExtension is not .glb', () => {
-    it('returns false', () => {
-      expect(inputIsBinary({
-        input: 'test.gltf'
-      })).toBeFalsy()
-    })
-  })
-})
-
-describe('outputIsBinary', () => {
-  context('when outputExtension is .glb', () => {
-    it('returns true', () => {
-      expect(outputIsBinary({
-        input: 'test.gltf',
-        binary: true
-      })).toBeTruthy()
-    })
-  })
-
-  context('when outputExtension is not .glb', () => {
-    it('returns false', () => {
-      expect(outputIsBinary({
-        input: 'test.gltf',
-        binary: false
-      })).toBeFalsy()
-    })
-  })
-})
-
-describe('replaceTextImageToWebP', () => {
-  const givenFileContents = 'image/png\ntest.png'
-  const givenFileName = 'test.gltf'
-  const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined as never);
-  (fs.readFileSync as jest.Mock) = jest.fn(() => givenFileContents)
-
-  it('replace png to webp in file', () => {
-    replaceTextImageToWebP(givenFileName)
-
-    expect(writeFileSyncSpy).toBeCalledWith(givenFileName, givenFileContents.replaceAll('png', 'webp'))
   })
 })
