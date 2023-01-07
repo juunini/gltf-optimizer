@@ -39,5 +39,5 @@ export const flagOptions: Record<string, Options> = {
     describe: 'Limit on error, as a fraction of mesh radius.',
     type: 'number',
     default: 0.01
-  },
+  }
 }

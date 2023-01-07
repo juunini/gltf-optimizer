@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { Document } from '@gltf-transform/core'
 import { arrayBufferToWebP } from 'webp-converter-browser'
 

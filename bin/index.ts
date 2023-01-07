@@ -17,11 +17,11 @@ const argv = yargs(process.argv.slice(2))
 
 const glb = fs.readFileSync(argv.input as string)
 
-optimizer.node(glb, {
+void optimizer.node(glb, {
   emissiveStrength: argv.emissiveStrength as number,
   transform: {
     draco: {
-      method: (argv.draco as any).method as any
+      method: (argv.draco as any).method
     },
     weld: {
       tolerance: (argv.weld as any).tolerance as number
