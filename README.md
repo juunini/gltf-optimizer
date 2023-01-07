@@ -40,7 +40,23 @@ Using [glTF-Transform](https://github.com/donmccurdy/glTF-Transform) and [webp-c
 ## Install
 
 ```bash
+# If you want to use CLI
 npm install --global gltf-optimizer
+
+# npm
+npm install gltf-optimizer
+
+# yarn
+yarn add gltf-optimizer
+
+# pnpm
+pnpm add gltf-optimizer
+
+# bun
+bun add gltf-optimizer
+
+# If you install and use browser side
+cp node_modules/gltf-optimizer/src/draco3d/* ./<your_static_path>/
 ```
 
 ## Usage
