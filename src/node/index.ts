@@ -5,16 +5,16 @@ import { nodeIO } from './nodeIO'
 import { transform } from '../lib/transform'
 
 interface Options {
-  emissiveStrength: number
-  transform: TransformOptions
+  emissiveStrength?: number
+  transform?: TransformOptions
 }
 
-export async function node (glb: Uint8Array, options: Options): Promise<Uint8Array> {
+export async function node (glb: Uint8Array, options?: Options): Promise<Uint8Array> {
   const io = await nodeIO()
   const doc = await io.readBinary(glb)
 
-  setEmissiveStrength(doc, options.emissiveStrength)
-  await transform(doc, options.transform, true)
+  setEmissiveStrength(doc, options?.emissiveStrength)
+  await transform(doc, true, options?.transform)
 
   return await io.writeBinary(doc)
 }
