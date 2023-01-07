@@ -1,11 +1,14 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Optimize glTF model",
   "homepage": "https://github.com/juunini/gltf-optimizer",
   "repository": "juunini/gltf-optimizer",
   "license": "MIT",
   "author": "juunini",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
   "bin": {
     "gltf-optimizer": "./bin/index.js"
   },

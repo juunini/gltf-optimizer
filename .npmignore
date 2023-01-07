@@ -2,6 +2,12 @@
 !/package.json
 !/LICENSE
 !/README.md
+
 !/bin
 /bin/*.ts
 !/bin/*.d.ts
+
+!/src
+/src/**/*.ts
+!/src/**/*.d.ts
+!/src/**/*.js
