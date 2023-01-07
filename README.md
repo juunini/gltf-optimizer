@@ -25,6 +25,8 @@
 
 ---
 
+## [Demo](https://juunini.github.io/gltf-optimizer)
+
 ## Caution
 
 Only can compress `.glb` file now.  
