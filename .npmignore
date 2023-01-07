@@ -11,3 +11,4 @@
 /src/**/*.ts
 !/src/**/*.d.ts
 !/src/**/*.js
+!/src/**/*.wasm

@@ -1,6 +1,6 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Optimize glTF model",
   "homepage": "https://github.com/juunini/gltf-optimizer",
   "repository": "juunini/gltf-optimizer",
@@ -13,7 +13,7 @@
     "gltf-optimizer": "./bin/index.js"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "tsc -p ./tsconfig.build.json && mkdir src/draco3d && cp node_modules/draco3d/*.wasm src/draco3d/",
     "test": "pnpm clear && jest",
     "test:cov": "pnpm clear && jest --coverage",
     "clear": "rimraf bin/*.js && rimraf bin/*.d.ts && rimraf src/**/*.js && rimraf src/**/*.d.ts",
