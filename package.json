@@ -18,7 +18,6 @@
     "@types/cookie": "^0.5.1",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
-    "draco3d": "^1.5.5",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
@@ -33,6 +32,6 @@
   "type": "module",
   "dependencies": {
     "get-file-using-a-tag": "^1.0.2",
-    "gltf-optimizer": "^0.3.2"
+    "gltf-optimizer": "^0.3.3"
   }
 }

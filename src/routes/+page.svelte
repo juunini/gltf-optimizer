@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>glTF optimizer</title>
+	<title>Online glTF optimizer</title>
 	<meta name="description" content="Optimize your glTF. Compress to Draco and convert texture to WebP" />
 </svelte:head>
 
@@ -28,6 +28,11 @@
 </script>
 
 <h1>glTF Optimizer</h1>
+<a href="https://github.com/juunini/gltf-optimizer" target="_blank" rel="noreferrer">Link to GitHub</a>
+
+<br />
+<br />
+<br />
 
 <input type="file" id="file" accept=".glb" on:change="{onChangeFile}" />
 
