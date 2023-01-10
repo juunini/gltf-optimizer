@@ -15,7 +15,7 @@ export async function web (glb: Uint8Array, options?: Options): Promise<Uint8Arr
   const doc = await io.readBinary(glb)
 
   setEmissiveStrength(doc, options?.emissiveStrength)
-  await convertTextureWebP(doc)
+  await convertTextureWebP(doc, options?.transform?.texture?.resize?.resolution)
   await transform(doc, false, options?.transform)
 
   return await io.writeBinary(doc)

@@ -7,6 +7,7 @@ import {
   TextureTransform,
   TextureWebP
 } from '@gltf-transform/extensions'
+import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer'
 
 export async function nodeIO (): Promise<NodeIO> {
   return new NodeIO()
@@ -19,6 +20,8 @@ export async function nodeIO (): Promise<NodeIO> {
     ])
     .registerDependencies({
       'draco3d.decoder': await draco3d.createDecoderModule(), // Optional.
-      'draco3d.encoder': await draco3d.createEncoderModule() // Optional.
+      'draco3d.encoder': await draco3d.createEncoderModule(), // Optional.
+      'meshopt.decoder': MeshoptDecoder,
+      'meshopt.encoder': MeshoptEncoder
     })
 }

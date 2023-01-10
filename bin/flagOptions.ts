@@ -39,5 +39,15 @@ export const flagOptions: Record<string, Options> = {
     describe: 'Limit on error, as a fraction of mesh radius.',
     type: 'number',
     default: 0.01
+  },
+  'texture.resize.resolution': {
+    describe: 'Maximum width/height to enforce, preserving aspect ratio. For example, a 4096x8192 texture, resized with limit [2048, 2048] will be reduced to 1024x2048.',
+    type: 'number',
+    default: 1024
+  },
+  'texture.resize.filter': {
+    describe: 'Resampling filter method. LANCZOS3 is sharper, LANCZOS2 is smoother.',
+    choices: ['LANCZOS2', 'LANCZOS3'],
+    default: 'LANCZOS3'
   }
 }

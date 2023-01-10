@@ -29,6 +29,12 @@ void optimizer.node(glb, {
     simplify: {
       ratio: (argv.simplify as any).ratio as number,
       error: (argv.simplify as any).error as number
+    },
+    texture: {
+      resize: {
+        resolution: (argv.texture as any).resize.resolution as number,
+        filter: (argv.texture as any).resize.filter as string
+      }
     }
   }
 })
