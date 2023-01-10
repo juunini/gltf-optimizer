@@ -32,6 +32,6 @@
   "type": "module",
   "dependencies": {
     "get-file-using-a-tag": "^1.0.2",
-    "gltf-optimizer": "^0.3.3"
+    "gltf-optimizer": "^0.3.6"
   }
 }
