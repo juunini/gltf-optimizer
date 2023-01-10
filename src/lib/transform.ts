@@ -12,7 +12,16 @@ import {
   textureResize,
   TextureResizeFilter
 } from '@gltf-transform/functions'
-import { DRACO_METHOD, SIMPLIFY_ERROR, SIMPLIFY_RATIO, TEXTURE_RESIZE_FILTER, TEXTURE_RESIZE_RESOLUTION, WELD_TOLERANCE } from '../constants'
+
+import {
+  DRACO_METHOD,
+  SIMPLIFY,
+  SIMPLIFY_ERROR,
+  SIMPLIFY_RATIO,
+  TEXTURE_RESIZE_FILTER,
+  TEXTURE_RESIZE_RESOLUTION,
+  WELD_TOLERANCE
+} from '../constants'
 
 export interface TransformOptions {
   draco?: {
@@ -22,6 +31,7 @@ export interface TransformOptions {
     tolerance?: number
   }
   simplify?: {
+    enabled?: boolean
     ratio?: number
     error?: number
   }
@@ -44,7 +54,11 @@ export async function transform (
   }: TransformOptions | undefined = {
     draco: { method: DRACO_METHOD },
     weld: { tolerance: WELD_TOLERANCE },
-    simplify: { ratio: SIMPLIFY_RATIO, error: SIMPLIFY_ERROR },
+    simplify: {
+      enabled: SIMPLIFY,
+      ratio: SIMPLIFY_RATIO,
+      error: SIMPLIFY_ERROR
+    },
     texture: {
       resize: {
         resolution: TEXTURE_RESIZE_RESOLUTION,
@@ -55,20 +69,27 @@ export async function transform (
 ): Promise<Document> {
   await MeshoptEncoder.ready
 
-  return await doc.transform(
+  const functions = new Set([
     resample(),
     draco({ method: _draco?.method ?? DRACO_METHOD }),
-    weld({ tolerance: _weld?.tolerance ?? WELD_TOLERANCE }),
-    simplify({
-      simplifier: MeshoptSimplifier,
-      ratio: _simplify?.ratio ?? SIMPLIFY_RATIO,
-      error: _simplify?.error ?? SIMPLIFY_ERROR
-    }),
     reorder({ encoder: MeshoptEncoder }),
     prune(),
-    dedup({ propertyTypes: [PropertyType.MESH] }),
-    isNode
-      ? textureResize({
+    dedup({ propertyTypes: [PropertyType.MESH] })
+  ])
+
+  if (_simplify?.enabled ?? SIMPLIFY) {
+    functions
+      .add(weld({ tolerance: _weld?.tolerance ?? WELD_TOLERANCE }))
+      .add(simplify({
+        simplifier: MeshoptSimplifier,
+        ratio: _simplify?.ratio ?? SIMPLIFY_RATIO,
+        error: _simplify?.error ?? SIMPLIFY_ERROR
+      }))
+  }
+
+  if (isNode) {
+    functions
+      .add(textureResize({
         size: [
           _texture?.resize?.resolution ?? TEXTURE_RESIZE_RESOLUTION,
           _texture?.resize?.resolution ?? TEXTURE_RESIZE_RESOLUTION
@@ -76,8 +97,9 @@ export async function transform (
         filter: ['LANCZOS2', 'lanczos2'].includes(_texture?.resize?.filter ?? '')
           ? TextureResizeFilter.LANCZOS2
           : TextureResizeFilter.LANCZOS3
-      })
-      : () => {},
-    isNode ? webp({ squoosh: require('@squoosh/lib') }) : () => {}
-  )
+      }))
+      .add(webp({ squoosh: require('@squoosh/lib') }))
+  }
+
+  return await doc.transform(...Array.from(functions))
 }

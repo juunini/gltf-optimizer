@@ -1,5 +1,6 @@
 import draco3d from 'draco3d'
 import { WebIO } from '@gltf-transform/core'
+import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer'
 import {
   DracoMeshCompression,
   MaterialsEmissiveStrength,
@@ -19,6 +20,8 @@ export async function webIO (): Promise<WebIO> {
     ])
     .registerDependencies({
       'draco3d.decoder': await draco3d.createDecoderModule(), // Optional.
-      'draco3d.encoder': await draco3d.createEncoderModule() // Optional.
+      'draco3d.encoder': await draco3d.createEncoderModule(), // Optional.
+      'meshopt.decoder': MeshoptDecoder,
+      'meshopt.encoder': MeshoptEncoder
     })
 }

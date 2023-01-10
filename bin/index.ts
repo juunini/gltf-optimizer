@@ -27,6 +27,7 @@ void optimizer.node(glb, {
       tolerance: (argv.weld as any).tolerance as number
     },
     simplify: {
+      enabled: (argv.simplify as any).enabled as boolean,
       ratio: (argv.simplify as any).ratio as number,
       error: (argv.simplify as any).error as number
     },

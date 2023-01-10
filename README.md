@@ -96,6 +96,7 @@ gltf-optimizer -i model.glb -o ./output
 | `--emissiveStrength` | Emissive strength of the glTF file. | No, default `1.0` |
 | `--draco.method` | `edgebreaker` or `sequential` | No, default `edgebreaker` |
 | `--weld.tolerance` | Tolerance, as a fraction of primitive AABB, used when merging similar vertices. | No, default `0.0001` |
+| `--simplify.enabled` | Enable/disable vertex simplification. | No, default `true` |
 | `--simplify.ratio` | Target ratio (0-1) of vertices to keep. | No, default `0.75` |
 | `--simplify.error` | Limit on error, as a fraction of mesh radius. | No, default `0.01` |
 | `--texture.resize.resolution` | Maximum width/height to enforce, preserving aspect ratio. For example, a 4096x8192 texture, resized with limit [2048, 2048] will be reduced to 1024x2048. | No, default `1024` |

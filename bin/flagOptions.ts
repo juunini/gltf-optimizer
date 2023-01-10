@@ -30,6 +30,11 @@ export const flagOptions: Record<string, Options> = {
     type: 'number',
     default: 0.0001
   },
+  'simplify.enabled': {
+    describe: 'Enable/disable vertex simplification.',
+    type: 'boolean',
+    default: true
+  },
   'simplify.ratio': {
     describe: 'Target ratio (0-1) of vertices to keep.',
     type: 'number',

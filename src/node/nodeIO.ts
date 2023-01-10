@@ -1,5 +1,6 @@
 import draco3d from 'draco3d'
 import { NodeIO } from '@gltf-transform/core'
+import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer'
 import {
   DracoMeshCompression,
   MaterialsEmissiveStrength,
@@ -7,7 +8,6 @@ import {
   TextureTransform,
   TextureWebP
 } from '@gltf-transform/extensions'
-import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer'
 
 export async function nodeIO (): Promise<NodeIO> {
   return new NodeIO()
