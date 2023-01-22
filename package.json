@@ -16,6 +16,7 @@
     "@sveltejs/adapter-auto": "^1.0.0",
     "@sveltejs/kit": "^1.0.0",
     "@types/cookie": "^0.5.1",
+    "@types/three": "^0.148.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "eslint": "^8.28.0",
@@ -31,7 +32,9 @@
   },
   "type": "module",
   "dependencies": {
+    "filesize": "^10.0.6",
     "get-file-using-a-tag": "^1.0.2",
-    "gltf-optimizer": "^0.3.6"
+    "gltf-optimizer": "^0.3.7",
+    "three": "^0.148.0"
   }
 }
