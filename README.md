@@ -32,6 +32,10 @@
 Only can compress `.glb` file now.  
 Will be support `.gltf` soon.  
 
+This library working in node v16.  
+see: https://github.com/GoogleChromeLabs/squoosh/issues/1260#issuecomment-1369809452  
+Will change squoosh to other library.  
+
 ## Introduce
 
 Optimize glTF.  

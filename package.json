@@ -1,6 +1,6 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Optimize glTF model",
   "homepage": "https://github.com/juunini/gltf-optimizer",
   "repository": "juunini/gltf-optimizer",
@@ -43,7 +43,7 @@
     "@gltf-transform/extensions": "^2.4.7",
     "@gltf-transform/functions": "^2.4.7",
     "@squoosh/lib": "^0.5.3",
-    "draco3d": "^1.5.5",
+    "draco3d": "^1.5.6",
     "meshoptimizer": "^0.18.1",
     "webp-converter-browser": "^1.0.3",
     "yargs": "^17.6.2"

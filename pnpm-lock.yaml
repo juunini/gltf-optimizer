@@ -13,7 +13,7 @@ specifiers:
   '@types/node': ^18.11.18
   '@types/yargs': ^17.0.17
   '@typescript-eslint/eslint-plugin': ^5.47.1
-  draco3d: ^1.5.5
+  draco3d: ^1.5.6
   eslint: ^8.30.0
   eslint-config-standard-with-typescript: ^24.0.0
   eslint-plugin-import: ^2.26.0
@@ -32,7 +32,7 @@ dependencies:
   '@gltf-transform/extensions': 2.5.1
   '@gltf-transform/functions': 2.5.1
   '@squoosh/lib': 0.5.3
-  draco3d: 1.5.5
+  draco3d: 1.5.6
   meshoptimizer: 0.18.1
   webp-converter-browser: 1.0.3
   yargs: 17.6.2
@@ -1650,8 +1650,8 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /draco3d/1.5.5:
-    resolution: {integrity: sha512-JVuNV0EJzD3LBYhGyIXJLeBID/EVtmFO1ZNhAYflTgiMiAJlbhXQmRRda/azjc8MRVMHh0gqGhiqHUo5dIXM8Q==}
+  /draco3d/1.5.6:
+    resolution: {integrity: sha512-+3NaRjWktb5r61ZFoDejlykPEFKT5N/LkbXsaddlw6xNSXBanUYpFc2AXXpbJDilPHazcSreU/DpQIaxfX0NfQ==}
     dev: false
 
   /ecc-jsbn/0.1.2:
