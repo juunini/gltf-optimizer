@@ -75,7 +75,7 @@ function gltfLoader() {
   const loader = new GLTFLoader()
   const dracoLoader = new DRACOLoader()
 
-  dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/')
+  dracoLoader.setDecoderPath('/')
   loader.setDRACOLoader(dracoLoader)
 
   return loader

@@ -34,7 +34,7 @@
   "dependencies": {
     "filesize": "^10.0.6",
     "get-file-using-a-tag": "^1.0.2",
-    "gltf-optimizer": "^0.3.7",
+    "gltf-optimizer": "^0.3.8",
     "three": "^0.148.0"
   }
 }
