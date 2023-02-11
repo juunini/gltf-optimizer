@@ -3,7 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": false,
-    "noEmit": false
+    "noEmit": false,
+    "outDir": "dist"
   },
   "exclude": ["**/*.test.ts"]
 }

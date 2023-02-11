@@ -7,10 +7,7 @@ import {
   weld,
   prune,
   dedup,
-  webp,
-  resample,
-  textureResize,
-  TextureResizeFilter
+  resample
 } from '@gltf-transform/functions'
 
 import {
@@ -45,7 +42,6 @@ export interface TransformOptions {
 
 export async function transform (
   doc: Document,
-  isNode: boolean,
   {
     draco: _draco,
     weld: _weld,
@@ -85,20 +81,6 @@ export async function transform (
         ratio: _simplify?.ratio ?? SIMPLIFY_RATIO,
         error: _simplify?.error ?? SIMPLIFY_ERROR
       }))
-  }
-
-  if (isNode) {
-    functions
-      .add(textureResize({
-        size: [
-          _texture?.resize?.resolution ?? TEXTURE_RESIZE_RESOLUTION,
-          _texture?.resize?.resolution ?? TEXTURE_RESIZE_RESOLUTION
-        ],
-        filter: ['LANCZOS2', 'lanczos2'].includes(_texture?.resize?.filter ?? '')
-          ? TextureResizeFilter.LANCZOS2
-          : TextureResizeFilter.LANCZOS3
-      }))
-      .add(webp({ squoosh: require('@squoosh/lib') }))
   }
 
   return await doc.transform(...Array.from(functions))

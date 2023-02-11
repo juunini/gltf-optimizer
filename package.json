@@ -1,19 +1,19 @@
 {
   "name": "gltf-optimizer",
-  "version": "0.3.8",
+  "version": "0.4.0",
   "description": "Optimize glTF model",
   "homepage": "https://github.com/juunini/gltf-optimizer",
   "repository": "juunini/gltf-optimizer",
   "license": "MIT",
   "author": "juunini",
-  "main": "./src/index.js",
-  "module": "./src/index.js",
-  "types": "./src/index.d.ts",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/module.js",
+  "types": "./dist/src/index.d.ts",
   "bin": {
-    "gltf-optimizer": "./bin/index.js"
+    "gltf-optimizer": "./dist/bin/index.js"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json && mkdir src/draco3d && cp node_modules/draco3d/*.wasm src/draco3d/",
+    "build": "tsc -p ./tsconfig.build.json",
     "test": "pnpm clear && jest",
     "test:cov": "pnpm clear && jest --coverage",
     "clear": "rimraf bin/*.js && rimraf bin/*.d.ts && rimraf src/**/*.js && rimraf src/**/*.d.ts",
@@ -26,6 +26,7 @@
     "@types/jest": "^29.2.4",
     "@types/jest-plugin-context": "^2.9.5",
     "@types/node": "^18.11.18",
+    "@types/sharp": "^0.31.1",
     "@types/yargs": "^17.0.17",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "eslint": "^8.30.0",
@@ -45,6 +46,7 @@
     "@squoosh/lib": "^0.5.3",
     "draco3d": "^1.5.6",
     "meshoptimizer": "^0.18.1",
+    "sharp": "^0.31.3",
     "webp-converter-browser": "^1.0.3",
     "yargs": "^17.6.2"
   }
