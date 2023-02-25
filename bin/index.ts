@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
-import fs from 'fs'
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs'
 
 import { flagOptions } from './flagOptions'
 import { optimizer } from '../src/index'
@@ -15,7 +15,7 @@ const argv = yargs(process.argv.slice(2))
   .options(flagOptions)
   .parseSync()
 
-const glb = fs.readFileSync(argv.input as string)
+const glb = readFileSync(argv.input as string)
 
 void optimizer.node(glb, {
   emissiveStrength: argv.emissiveStrength as number,
@@ -42,9 +42,9 @@ void optimizer.node(glb, {
   .then((result) => {
     const outputDir = outputDirectory(argv)
 
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir)
+    if (!existsSync(outputDir)) {
+      mkdirSync(outputDir)
     }
 
-    fs.writeFileSync(`${outputDir}/compressed.glb`, result)
+    writeFileSync(`${outputDir}/compressed.glb`, result)
   })
