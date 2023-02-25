@@ -18,8 +18,11 @@
 <br />
 
 <div align="center">
-  <a href="https://codecov.io/gh/juunini/gltf-optimizer" > 
-    <img src="https://codecov.io/gh/juunini/gltf-optimizer/branch/main/graph/badge.svg?token=46CB8BN45T"/> 
+  <a href="https://codecov.io/gh/juunini/gltf-optimizer"> 
+    <img src="https://codecov.io/gh/juunini/gltf-optimizer/branch/main/graph/badge.svg?token=46CB8BN45T" /> 
+  </a>
+  <a href="https://snyk.io/test/github/juunini/gltf-optimizer">
+    <img src="https://snyk.io/test/github/juunini/gltf-optimizer/badge.svg" />
   </a>
 </div>
 
