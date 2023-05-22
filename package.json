@@ -45,7 +45,7 @@
     "@gltf-transform/functions": "^2.4.7",
     "@squoosh/lib": "^0.5.3",
     "draco3d": "^1.5.6",
-    "meshoptimizer": "^0.18.1",
+    "meshoptimizer": "^0.19.0",
     "sharp": "^0.31.3",
     "webp-converter-browser": "^1.0.3",
     "yargs": "^17.6.2"
