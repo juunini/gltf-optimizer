@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
 import fs from 'fs'
+import path from 'path'
 
 import { flagOptions } from './flagOptions'
 import { optimizer } from '../src/index'
@@ -46,5 +47,21 @@ void optimizer.node(glb, {
       fs.mkdirSync(outputDir)
     }
 
-    fs.writeFileSync(`${outputDir}/compressed.glb`, result)
+    // Generate output filename from input
+    // If --filename flag provided, use that; otherwise generate from input
+    let outputFilename: string
+
+    if (typeof argv.filename === 'string' && argv.filename.trim() !== '') {
+      // User specified custom filename
+      outputFilename = argv.filename
+    } else {
+      // Auto-generate: model.glb -> model_optimised.glb
+      const inputPath = path.parse(argv.input as string)
+      outputFilename = `${inputPath.name}_optimized${inputPath.ext}`
+    }
+
+    const outputPath = `${outputDir}/${outputFilename}`
+    fs.writeFileSync(outputPath, result)
+
+    console.log(`✓ Optimized file saved to: ${outputPath}`)
   })
