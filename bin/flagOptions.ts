@@ -16,6 +16,12 @@ export const flagOptions: Record<string, Options> = {
     normalize: true,
     default: './'
   },
+  filename: {
+    alias: 'f',
+    describe: 'Output filename (without path). If not specified, defaults to "compressed.glb"',
+    type: 'string',
+    default: ''
+  },
   emissiveStrength: {
     describe: 'Emissive strength of the glTF file.',
     type: 'number',
