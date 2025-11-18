@@ -11,7 +11,7 @@ export async function convertTextureWebP (doc: Document, resolution: number = 10
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const sharp = require('sharp')
       return sharp(texture.getImage() as Uint8Array)
-        .resize(width * rate, height * rate)
+        .resize(Math.round(width * rate), Math.round(height * rate))
         .toBuffer()
         .then((webp: Buffer) => {
           texture.copy(
