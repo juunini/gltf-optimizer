@@ -42,7 +42,7 @@
   "dependencies": {
     "@gltf-transform/core": "^2.4.7",
     "@gltf-transform/extensions": "^2.4.7",
-    "@gltf-transform/functions": "^2.4.7",
+    "@gltf-transform/functions": "^3.4.3",
     "@squoosh/lib": "^0.5.3",
     "draco3d": "^1.5.6",
     "meshoptimizer": "^0.18.1",
